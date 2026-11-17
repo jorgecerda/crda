@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>crd△</title>
+<meta name="description" content="small, fast tools by jorge cerda">
+<style>
+  :root {
+    color-scheme: dark;
+    background: #000;
+    color: #fff;
+    --dim: #8a8a8a;
+    font: 14px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  body { max-width: 72ch; margin: 0 auto; padding: 6ch 2ch; }
+  a { color: inherit; text-underline-offset: 3px; }
+  a:hover { background: CanvasText; color: Canvas; text-decoration: none; }
+  h1 { font-size: inherit; font-weight: normal; margin: 0 0 4ch; }
+  .dim { color: var(--dim); }
+  #sky { position: fixed; inset: 0; overflow: hidden; pointer-events: none; color: var(--dim); }
+  #sky span { position: absolute; will-change: opacity; animation: twinkle 1s steps(1) infinite; }
+  h1, main { position: relative; }
+  @keyframes twinkle { 0% { opacity: 1; } 25% { opacity: .5; } 50% { opacity: .15; } 75% { opacity: .5; } }
+  p { margin: 0 0 1ch; }
+  .p::before { content: "$ "; color: var(--dim); }
+  ul { list-style: none; padding: 0; margin: 0 0 4ch; }
+  li { padding: .25ch 0; }
+  @media (max-width: 600px) {
+    /* ~37em of content: scale font with viewport height so it all fits */
+    :root { font-size: min(14px, 2.6vh); font-size: min(14px, 2.6dvh); line-height: 1.45; }
+    body { padding: 1.5em 1.5em; }
+    br { display: none; }
+    h1, ul, p { margin: 0; }
+    .p { margin-top: 1.2em; }
+  }
+  .cursor { animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } /* stars keep twinkling: opacity fade, no motion */ }
+</style>
+</head>
+<body>
+<div id="sky" aria-hidden="true"></div>
+<h1>crd△</h1>
+
+<main>
+  <p class="p">whoami</p>
+  <p>jorge cerda — product &amp; project mngr</p>
+  <br>
+
+  <p class="p">ls ~/projects</p>
+  <ul>
+    <li><a href="https://ddw.crda.dev">duckduckwork</a></li>
+    <li><a href="https://tt.crda.dev">tinytools</a></li>
+    <li><a href="https://lf.crda.dev">letterfy</a></li>
+    <li><a href="https://tp.crda.dev">tinyparty</a></li>
+  </ul>
+
+  <p class="p">contact</p>
+  <p><a href="mailto:j@crda.dev">j@crda.dev</a></p>
+  <br>
+
+  <p class="p">links</p>
+  <p><a href="https://github.com/jorgecerda">github</a></p>
+  <p><a href="https://www.linkedin.com/in/jorgecerda">linkedin</a></p>
+  <br>
+
+  <p class="p"><span class="cursor" aria-hidden="true">█</span></p>
+</main>
+<script>
+  // ascii stars: random positions, random blink offsets
+  sky.innerHTML = Array.from({ length: 90 }, () =>
+    `<span style="left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:-${Math.random()*2}s;animation-duration:${.6+Math.random()*1.4}s">${'.·*+˚'[Math.random()*5|0]}</span>`
+  ).join('');
+</script>
+</body>
+</html>
